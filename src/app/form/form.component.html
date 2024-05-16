@@ -1,43 +1,45 @@
-<form class="row g-3 container" []>
+<form class="row g-3 container" [formGroup]="myform">
     <div class="col-md-4">
         <label for="firstname" class="form-label">FIRT NAME :</label>
-        <input type="TEXT" class="form-control" id="firstname" placeholder="Leanne Graham">
+        <input type="TEXT" class="form-control" id="firstname" placeholder="Leanne Graham" formControlName="firstname">
     </div>
     <div class="col-md-4">
         <label for="lastname" class="form-label">LAST NAME :</label>
-        <input type="TEXT" class="form-control" id="lastname" placeholder="Leanne Graham">
+        <input type="TEXT" class="form-control" id="lastname" placeholder="Leanne Graham" formControlName="lastname">
     </div>
     <div class="col-8">
         <label for="age" class="form-label">AGE :</label>
-        <input type="number" class="form-control" id="age" placeholder="55">
+        <input type="number" class="form-control" id="age" placeholder="25" formControlName="age">
     </div>
 
     <div class="col-8 d-flex justify-content-center">
         <label for="hobbies" class="form-label pe-2">HOBBIES :</label>
 
-        <input class="form-check-input" type="checkbox" value="playing" id="checkbox">
-        <label class="form-check-label pe-2" for="flexCheckDefault">PLAYING</label>
+        <input class="form-check-input" name="playing" type="checkbox" value="playing" id="checkbox" formControlName="hobbies">
+        <label class="form-check-label pe-2" for="hobbies">PLAYING</label>
 
-        <input class="form-check-input" type="checkbox" value="dancing" id="checkbox">
-        <label class="form-check-label pe-2" for="flexCheckDefault">DANCING</label>
+        <input class="form-check-input" name="dancing" type="checkbox" value="dancing" id="checkbox" formControlName="hobbies">
+        <label class="form-check-label pe-2" for="hobbies">DANCING</label>
 
-        <input class="form-check-input" type="checkbox" value="reading" id="checkbox">
-        <label class="form-check-label" for="flexCheckDefault">READING</label>
+        <input class="form-check-input" name="reading" type="checkbox" value="reading" id="checkbox" formControlName="hobbies">
+        <label class="form-check-label" for="hobbies">READING</label>
 
     </div>
     <div class="col-8 d-flex justify-content-center">
         <label for="gender" class="form-label pe-2">GENDER :</label>
 
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="gender">
-        <label class="form-check-label pe-2" for="flexRadioDefault1">MALE</label>
+        <input class="form-check-input" type="radio" id="gender" value="male"
+        formControlName="gender">
+        <label class="form-check-label pe-2" for="male">MALE</label>
 
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="gender">
-        <label class="form-check-label" for="flexRadioDefault2">FEMALE</label>
+        <input class="form-check-input" type="radio" id="gender" formControlName="gender" value="female">
+        <label class="form-check-label" for="female">FEMALE</label>
 
     </div>
     <div class="col-md-5">
         <label for="inputCity" class="form-label">City :</label>
-        <input type="text" class="form-control" id="City" placeholder="Gwenborough">
+        <input type="text" class="form-control" id="City" placeholder="Gwenborough"
+        formControlName="city">
     </div>
 
     <div class="col-8 justify-content-center d-flex">
