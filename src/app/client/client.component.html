@@ -1,4 +1,3 @@
-
 <table class="table table align-middle  mt-5">
     <thead>
         <tr>
@@ -21,8 +20,8 @@
             <td>{{item.city}}</td>
             <td>{{item.age}}</td>
             <td>{{item.option}}
-                <button type="" class="btn btn-primary me-2">EDIT</button>
-                <button type="" class="btn btn-danger">DELETE</button>
+                <button type="" class="btn btn-primary me-2" (click)="updateData()">UPDATE</button>
+                <button type="" class="btn btn-danger" (click)="deleteData(item.id)">DELETE</button>
             </td>
         </tr>
         }

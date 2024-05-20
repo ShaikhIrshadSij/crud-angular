@@ -1,4 +1,31 @@
 form {
     margin: 0 auto;
     justify-content: center;
+    border: 1px solid blanchedalmond;
+    padding: 10px;
+    font-style: oblique;
+    background-color: blanchedalmond;
+    color: brown;
+}
+
+input {
+    font-style: oblique;
+
+}
+
+
+table {
+    border-collapse: collapse;
+    width: 70%;
+    text-align: center;
+    margin: 0 auto;
+
+}
+
+td,
+th {
+    border: 1px solid black;
+    font-style: oblique;
+    background-color: blanchedalmond;
+    color: brown;
 }

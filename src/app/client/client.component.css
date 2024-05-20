@@ -3,9 +3,13 @@ table {
     width: 70%;
     text-align: center;
     margin: 0 auto;
+
 }
 
 td,
 th {
     border: 1px solid black;
+    font-style: oblique;
+    background-color: blanchedalmond;
+    color: brown;
 }

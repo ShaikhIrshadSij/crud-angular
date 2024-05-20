@@ -1,11 +1,11 @@
 <form class="row g-3 container" [formGroup]="myform">
     <div class="col-md-4">
-        <label for="firstname" class="form-label">FIRT NAME :</label>
-        <input type="TEXT" class="form-control" id="firstname" placeholder="Leanne Graham" formControlName="firstname">
+        <label for="inputfirstName" class="form-label">FIRT NAME :</label>
+        <input type="text" class="form-control" id="firstName" placeholder="Leanne " formControlName="firstName">
     </div>
     <div class="col-md-4">
-        <label for="lastname" class="form-label">LAST NAME :</label>
-        <input type="TEXT" class="form-control" id="lastname" placeholder="Leanne Graham" formControlName="lastname">
+        <label for="inputlastName" class="form-label">LAST NAME :</label>
+        <input type="text" class="form-control" id="lastName" placeholder=" Graham" formControlName="lastName">
     </div>
     <div class="col-8">
         <label for="age" class="form-label">AGE :</label>
@@ -15,21 +15,23 @@
     <div class="col-8 d-flex justify-content-center">
         <label for="hobbies" class="form-label pe-2">HOBBIES :</label>
 
-        <input class="form-check-input" name="playing" type="checkbox" value="playing" id="checkbox" formControlName="hobbies">
+        <input class="form-check-input" name="playing" type="checkbox" value="playing" id="checkbox"
+            formControlName="hobbies">
         <label class="form-check-label pe-2" for="hobbies">PLAYING</label>
 
-        <input class="form-check-input" name="dancing" type="checkbox" value="dancing" id="checkbox" formControlName="hobbies">
+        <input class="form-check-input" name="dancing" type="checkbox" value="dancing" id="checkbox"
+            formControlName="hobbies">
         <label class="form-check-label pe-2" for="hobbies">DANCING</label>
 
-        <input class="form-check-input" name="reading" type="checkbox" value="reading" id="checkbox" formControlName="hobbies">
+        <input class="form-check-input" name="reading" type="checkbox" value="reading" id="checkbox"
+            formControlName="hobbies">
         <label class="form-check-label" for="hobbies">READING</label>
 
     </div>
     <div class="col-8 d-flex justify-content-center">
         <label for="gender" class="form-label pe-2">GENDER :</label>
 
-        <input class="form-check-input" type="radio" id="gender" value="male"
-        formControlName="gender">
+        <input class="form-check-input" type="radio" id="gender" value="male" formControlName="gender">
         <label class="form-check-label pe-2" for="male">MALE</label>
 
         <input class="form-check-input" type="radio" id="gender" formControlName="gender" value="female">
@@ -38,8 +40,7 @@
     </div>
     <div class="col-md-5">
         <label for="inputCity" class="form-label">City :</label>
-        <input type="text" class="form-control" id="City" placeholder="Gwenborough"
-        formControlName="city">
+        <input type="text" class="form-control" id="City" placeholder="Gwenborough" formControlName="city">
     </div>
 
     <div class="col-8 justify-content-center d-flex">
@@ -47,3 +48,35 @@
         <button type="" class="btn btn-primary" (click)="submit($event) ">SUBMIT</button>
     </div>
 </form>
+
+
+
+<table class="table table align-middle  mt-5">
+    <thead>
+        <tr>
+            <th scope="col">FIRST NAME</th>
+            <th scope="col">LAST NAME</th>
+            <th scope="col">HOBBIES</th>
+            <th scope="col">GENDER</th>
+            <th scope="col">CITY</th>
+            <th scope="col">AGE</th>
+            <th scope="col">OPTION</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for(item of data;track item){
+        <tr>
+            <td>{{item.firstName}}</td>
+            <td>{{item.lastName}}</td>
+            <td>{{item.hobbies}}</td>
+            <td>{{item.gender}}</td>
+            <td>{{item.city}}</td>
+            <td>{{item.age}}</td>
+            <td>{{item.option}}
+                <button type="" class="btn btn-primary me-2" (click)="updateData()">UPDATE</button>
+                <button type="" class="btn btn-danger" (click)="deleteData(item.id)">DELETE</button>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
