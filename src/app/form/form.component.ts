@@ -72,9 +72,6 @@ export class FormComponent {
         (response: any) => {
           console.log('Item deleted successfully');
         },
-        (error: any) => {
-          console.error('Error deleting item:', error);
-        }
       );
     } else {
       console.error('Item not found for deletion');
