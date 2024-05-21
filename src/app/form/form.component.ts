@@ -1,16 +1,23 @@
-import { HttpClient, } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { ClientComponent } from '../client/client.component';
 
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, ClientComponent],
+  imports: [ReactiveFormsModule, FormsModule, HttpClientModule],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css'
 })
-export class FormComponent implements OnInit {
+export class FormComponent {
+  data: any;
+
+  constructor(private http: HttpClient) { }
+
+  ngOnInit(): void {
+    this.fetchData();
+  }
+
   myform = new FormGroup({
     firstName: new FormControl(''),
     lastName: new FormControl(''),
@@ -20,8 +27,6 @@ export class FormComponent implements OnInit {
     city: new FormControl(''),
   });
 
-  data: any;
-  constructor(private http: HttpClient) { }
 
   submit(data: any) {
     data.preventDefault();
@@ -37,9 +42,6 @@ export class FormComponent implements OnInit {
   }
   resetform() {
     this.myform.reset();
-  }
-  ngOnInit(): void {
-    this.fetchData();
   }
 
   fetchData() {
