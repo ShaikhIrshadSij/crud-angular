@@ -30,38 +30,25 @@ export class FormComponent {
 
   submit(data: any) {
     data.preventDefault();
-    console.log(this.myform.value);
     const formData = this.myform.value;
     this.http.post<any>('https://student-api.mycodelibraries.com/api/student/add', formData)
       .subscribe(response => {
-        console.log('added');
-        this.resetform();
+        this.myform.reset();
         this.fetchData();
       },
       );
-  }
-  resetform() {
-    this.myform.reset();
   }
 
   fetchData() {
     this.http.get('https://student-api.mycodelibraries.com/api/student/get').subscribe(
       (fetch: any) => {
-        console.log(fetch);
         this.data = fetch.data;
       }
     )
   }
 
   updateData() {
-    this.data.forEach((item: any) => {
-      item.firstname = '#firstname';
-      item.lastname = '#lastname';
-      item.hobbies = '#hobbies';
-      item.gender = '#gender';
-      item.city = '#city';
-      item.age = '#age';
-    });
+    this.myform.setValue({firstName: '#firstName'});
     this.http.post('https://student-api.mycodelibraries.com/api/student/update', this.data).subscribe(
       (response: any) => {
         console.log('edit data');
