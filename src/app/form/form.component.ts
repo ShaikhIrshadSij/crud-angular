@@ -61,10 +61,11 @@ export class FormComponent {
       }
     )
   }
+
+
   deleteData(id: any) {
     // Find the index of the item with the specified ID
     let index = this.data.findIndex((item: any) => item.id === id);
-
     // If the item is found, remove it from the data array
     if (index !== -1) {
       this.data.splice(index, 1);
@@ -76,7 +77,6 @@ export class FormComponent {
     } else {
       console.error('Item not found for deletion');
     }
-
     // Optionally, you can send a request to the server to delete the item
   }
 
