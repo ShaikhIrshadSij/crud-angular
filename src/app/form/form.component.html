@@ -1,4 +1,4 @@
-<form class="row g-3 container" [formGroup]="myform">
+<form class="row g-3 container" [formGroup]="myform" id="form">
     <div class="col-md-4">
         <label for="inputfirstName" class="form-label">FIRST NAME :</label>
         <input type="text" class="form-control" id="firstName" placeholder="Leanne " formControlName="firstName">
@@ -15,15 +15,15 @@
     <div class="col-8 d-flex justify-content-center">
         <label for="hobbies" class="form-label pe-2">HOBBIES :</label>
 
-        <input class="form-check-input" name="playing" type="checkbox" value="playing" id="checkbox"
+        <input class="form-check-input" name="playing" type="checkbox" value="playing" id="checkbox1"
             formControlName="hobbies">
         <label class="form-check-label pe-2" for="hobbies">PLAYING</label>
 
-        <input class="form-check-input" name="dancing" type="checkbox" value="dancing" id="checkbox"
+        <input class="form-check-input" name="dancing" type="checkbox" value="dancing" id="checkbox2"
             formControlName="hobbies">
         <label class="form-check-label pe-2" for="hobbies">DANCING</label>
 
-        <input class="form-check-input" name="reading" type="checkbox" value="reading" id="checkbox"
+        <input class="form-check-input" name="reading" type="checkbox" value="reading" id="checkbox3"
             formControlName="hobbies">
         <label class="form-check-label" for="hobbies">READING</label>
 
@@ -49,8 +49,6 @@
     </div>
 </form>
 
-
-
 <table class="table table align-middle  mt-5">
     <thead>
         <tr>
@@ -73,7 +71,8 @@
             <td>{{item.city}}</td>
             <td>{{item.age}}</td>
             <td>{{item.option}}
-                <button type="" class="btn btn-primary me-2" (click)="updateData()">UPDATE</button>
+                <button type="" class="btn btn-primary me-2" (click)="updateData(item)"><a href="#form"
+                        class="">UPDATE</a></button>
                 <button type="" class="btn btn-danger" (click)="deleteData(item.id)">DELETE</button>
             </td>
         </tr>

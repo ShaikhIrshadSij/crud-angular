@@ -27,7 +27,6 @@ export class FormComponent {
     city: new FormControl(''),
   });
 
-
   submit(data: any) {
     data.preventDefault();
     const formData = this.myform.value;
@@ -47,25 +46,42 @@ export class FormComponent {
     )
   }
 
-  updateData() {
-    this.myform.setValue({firstName: '#firstName'});
+  updateData(item: any) {
+    this.myform.setValue({
+      firstName: item.firstName,
+      lastName: item.lastName,
+      age: item.age,
+      hobbies: item.hobbies,
+      gender: item.gender,
+      city: item.city,
+    });
     this.http.post('https://student-api.mycodelibraries.com/api/student/update', this.data).subscribe(
       (response: any) => {
         console.log('edit data');
       }
     )
-
   }
-
-
   deleteData(id: any) {
-    this.http.delete('https://student-api.mycodelibraries.com/api/student/delete').subscribe(
-      (response: any) => {
-        console.log('delete');
+    // Find the index of the item with the specified ID
+    let index = this.data.findIndex((item: any) => item.id === id);
 
-      }
-    )
+    // If the item is found, remove it from the data array
+    if (index !== -1) {
+      this.data.splice(index, 1);
+      this.http.delete('https://student-api.mycodelibraries.com/api/user/delete?id=${id}').subscribe(
+        (response: any) => {
+          console.log('Item deleted successfully');
+        },
+        (error: any) => {
+          console.error('Error deleting item:', error);
+        }
+      );
+    } else {
+      console.error('Item not found for deletion');
+    }
 
+    // Optionally, you can send a request to the server to delete the item
   }
+
 }
 

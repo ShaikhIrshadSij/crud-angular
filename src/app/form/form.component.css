@@ -29,3 +29,9 @@ th {
     background-color: blanchedalmond;
     color: brown;
 }
+
+a {
+    color: white;
+    font-style: oblique;
+    text-decoration: none;
+}
