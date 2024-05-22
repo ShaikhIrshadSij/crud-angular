@@ -19,6 +19,7 @@ export class FormComponent {
   }
 
   myform = new FormGroup({
+    // _id: new FormControl(),
     firstName: new FormControl(''),
     lastName: new FormControl(''),
     age: new FormControl(''),
@@ -48,6 +49,7 @@ export class FormComponent {
 
   updateData(item: any) {
     this.myform.setValue({
+      // _id: item.id,
       firstName: item.firstName,
       lastName: item.lastName,
       age: item.age,
@@ -65,19 +67,21 @@ export class FormComponent {
 
   deleteData(id: any) {
     // Find the index of the item with the specified ID
-    let index = this.data.findIndex((item: any) => item.id === id);
-    // If the item is found, remove it from the data array
-    if (index !== -1) {
-      this.data.splice(index, 1);
-      this.http.delete('https://student-api.mycodelibraries.com/api/user/delete?id=${id}').subscribe(
-        (response: any) => {
-          console.log('Item deleted successfully');
-        },
-      );
-    } else {
-      console.error('Item not found for deletion');
-    }
-    // Optionally, you can send a request to the server to delete the item
+    // let index = this.data.findIndex((item: any) => item.id === id);
+    // // If the item is found, remove it from the data array
+    // if (index !== -1) {
+    //   // this.data.splice(index, 1);
+    // } else {
+    //   console.error('Item not found for deletion');
+    // }
+    this.http.delete(`https://student-api.mycodelibraries.com/api/user/delete?id=${id}`, this.data).subscribe(
+      (response: any) => {
+        console.log('Item deleted successfully');
+        console.log(id);
+        // this.fetchData();
+
+      },
+    );
   }
 
 }

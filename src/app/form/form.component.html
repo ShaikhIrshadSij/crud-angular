@@ -1,4 +1,8 @@
 <form class="row g-3 container" [formGroup]="myform" id="form">
+    <!-- <div class="col-md-4">
+        <label for="inputid" class="form-label">id :</label>
+        <input type="text" class="form-control" id="id" placeholder="62623582 " formControlName="_id">
+    </div> -->
     <div class="col-md-4">
         <label for="inputfirstName" class="form-label">FIRST NAME :</label>
         <input type="text" class="form-control" id="firstName" placeholder="Leanne " formControlName="firstName">
@@ -52,6 +56,7 @@
 <table class="table table align-middle  mt-5">
     <thead>
         <tr>
+            <th scope="col">ID</th>
             <th scope="col">FIRST NAME</th>
             <th scope="col">LAST NAME</th>
             <th scope="col">HOBBIES</th>
@@ -64,6 +69,7 @@
     <tbody>
         @for(item of data;track item){
         <tr>
+            <td>{{item._id}}</td>
             <td>{{item.firstName}}</td>
             <td>{{item.lastName}}</td>
             <td>{{item.hobbies}}</td>
@@ -73,7 +79,7 @@
             <td>{{item.option}}
                 <button type="" class="btn btn-primary me-2" (click)="updateData(item)"><a href="#form"
                         class="">UPDATE</a></button>
-                <button type="" class="btn btn-danger" (click)="deleteData(item.id)">DELETE</button>
+                <button type="" class="btn btn-danger" (click)="deleteData(item._id)">DELETE</button>
             </td>
         </tr>
         }
