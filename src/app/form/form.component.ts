@@ -1,6 +1,7 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { response } from 'express';
 
 @Component({
   selector: 'app-form',
@@ -19,24 +20,40 @@ export class FormComponent {
   }
 
   myform = new FormGroup({
-    // _id: new FormControl(),
+    // _id: new FormControl(''),
     firstName: new FormControl(''),
     lastName: new FormControl(''),
     age: new FormControl(''),
-    hobbies: new FormControl(''),
+    hobbies: new FormControl([]),
     gender: new FormControl(''),
     city: new FormControl(''),
   });
 
+  // submit(data: any) {
+  //   data.preventDefault();
+  //   const formData = this.myform.value;
+
+  //   if (formData._id) {
+  //     this.updateData(formData);
+  //     this.myform.reset();
+  //   } else {
+  //     this.http.post<any>('https://student-api.mycodelibraries.com/api/student/add', formData)
+  //       .subscribe(response => {
+  //         this.myform.reset();
+  //         this.fetchData();
+  //       },
+  //       );
+  //   }
+  // }
+
   submit(data: any) {
     data.preventDefault();
     const formData = this.myform.value;
-    this.http.post<any>('https://student-api.mycodelibraries.com/api/student/add', formData)
-      .subscribe(response => {
+    this.http.post('https://student-api.mycodelibraries.com/api/student/add', formData).subscribe
+      (response => {
         this.myform.reset();
         this.fetchData();
-      },
-      );
+      })
   }
 
   fetchData() {
@@ -49,7 +66,7 @@ export class FormComponent {
 
   updateData(item: any) {
     this.myform.setValue({
-      // _id: item.id,
+      // _id: item._id, 
       firstName: item.firstName,
       lastName: item.lastName,
       age: item.age,
@@ -60,25 +77,18 @@ export class FormComponent {
     this.http.post('https://student-api.mycodelibraries.com/api/student/update', this.data).subscribe(
       (response: any) => {
         console.log('edit data');
+        // this.fetchData();
       }
     )
   }
 
 
   deleteData(id: any) {
-    // Find the index of the item with the specified ID
-    // let index = this.data.findIndex((item: any) => item.id === id);
-    // // If the item is found, remove it from the data array
-    // if (index !== -1) {
-    //   // this.data.splice(index, 1);
-    // } else {
-    //   console.error('Item not found for deletion');
-    // }
-    this.http.delete(`https://student-api.mycodelibraries.com/api/user/delete?id=${id}`, this.data).subscribe(
+    this.http.delete(`https://student-api.mycodelibraries.com/api/student/delete?id=${id}`, this.data).subscribe(
       (response: any) => {
         console.log('Item deleted successfully');
         console.log(id);
-        // this.fetchData();
+        this.fetchData();
 
       },
     );
