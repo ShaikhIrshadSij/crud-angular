@@ -6,7 +6,7 @@ import { response } from 'express';
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, HttpClientModule],
+  imports: [ReactiveFormsModule, FormsModule, HttpClientModule ,],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css'
 })
