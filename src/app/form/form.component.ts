@@ -12,7 +12,6 @@ import { response } from 'express';
 })
 export class FormComponent {
   data: any;
-
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
@@ -29,26 +28,14 @@ export class FormComponent {
     city: new FormControl(''),
   });
 
-
-  onchange(e: any) {
-    let checkvalue = e.target.value;
-    let checked = e.target.checked
-    // console.log(checkvalue, checked);
-    let checkedArray = this.myform.get('hobbies') as FormArray;
-    if (checked) {
-      checkedArray.push(new FormControl(checkvalue));
-    }
-    // this.myform.reset();
-  }
-
   submit(data: any) {
     data.preventDefault();
     const formData = this.myform.value;
     if (formData.id) {
       this.http.post<any>('https://student-api.mycodelibraries.com/api/student/update', formData)
         .subscribe(response => {
-          this.myform.reset();
           this.fetchData();
+          this.myform.reset();
         },
         );
     } else {
@@ -61,10 +48,8 @@ export class FormComponent {
     const formData = this.myform.value;
     this.http.post('https://student-api.mycodelibraries.com/api/student/add', formData).subscribe
       (response => {
-        console.log(formData);
-        this.myform.reset();
-        // this.myform.controls.hobbies.setValue([])
         this.fetchData();
+        this.myform.reset();
       })
   }
 
@@ -77,27 +62,57 @@ export class FormComponent {
   }
 
   updateData(item: any) {
-    this.myform.setValue({
+    this.myform.patchValue({
       id: item._id,
       firstName: item.firstName,
       lastName: item.lastName,
       age: item.age,
-      hobbies: item.hobbies,
       gender: item.gender,
       city: item.city,
     });
+    const hobbiesArray = this.myform.get('hobbies') as FormArray;
+    hobbiesArray.clear();
+
+    if (item.hobbies && item.hobbies.length > 0) {
+      const hobbies = item.hobbies.split(',');
+
+      hobbies.forEach((hobby: any) => {
+        hobbiesArray.push(new FormControl(hobby.trim()));
+      });
+    }
+  }
+
+
+  onchange(e: any) {
+    const checkvalue = e.target.value;
+    const checked = e.target.checked;
+    const checkedArray = this.myform.get('hobbies') as FormArray;
+
+    if (checked) {
+      checkedArray.push(new FormControl(checkvalue));
+    } else {
+      const index = checkedArray.controls.findIndex(control => control.value === checkvalue);
+      if (index >= 0) {
+        checkedArray.removeAt(index);
+      }
+    }
+  }
+
+  isHobbySelected(hobby: string): boolean {
+    const hobbiesArray = this.myform.get('hobbies') as FormArray;
+    return hobbiesArray.controls.some(control => control.value === hobby);
   }
 
 
   deleteData(id: any) {
     this.http.delete(`https://student-api.mycodelibraries.com/api/student/delete?id=${id}`, this.data).subscribe(
       (response: any) => {
-        console.log('Item deleted successfully');
-        console.log(id);
         this.fetchData();
       },
     );
   }
 
 }
+
+
 

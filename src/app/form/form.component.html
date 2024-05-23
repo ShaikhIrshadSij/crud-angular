@@ -20,15 +20,15 @@
         <label for="hobbies" class="form-label pe-2">HOBBIES :</label>
 
         <input class="form-check-input" name="" type="checkbox" value="playing" id="checkbox1"
-            (change)="onchange($event)">
+            (change)="onchange($event)" [checked]="isHobbySelected('playing')">
         <label class="form-check-label pe-2" for="hobbies">PLAYING</label>
 
         <input class="form-check-input" name="" type="checkbox" value="dancing" id="checkbox2"
-            (change)="onchange($event)">
+            (change)="onchange($event)" [checked]="isHobbySelected('dancing')">
         <label class="form-check-label pe-2" for="hobbies">DANCING</label>
 
         <input class="form-check-input" name="" type="checkbox" value="reading" id="checkbox3"
-            (change)="onchange($event)">
+            (change)="onchange($event)" [checked]="isHobbySelected('reading')">
         <label class="form-check-label" for="hobbies">READING</label>
 
     </div>
@@ -56,26 +56,26 @@
 <table class="table table align-middle  mt-5">
     <thead>
         <tr>
-            <th scope="col">ID</th>
+            <!-- <th scope="col">ID</th> -->
             <th scope="col">FIRST NAME</th>
             <th scope="col">LAST NAME</th>
+            <th scope="col">AGE</th>
             <th scope="col">HOBBIES</th>
             <th scope="col">GENDER</th>
             <th scope="col">CITY</th>
-            <th scope="col">AGE</th>
             <th scope="col">OPTION</th>
         </tr>
     </thead>
     <tbody>
         @for(item of data;track item){
         <tr>
-            <td>{{item._id}}</td>
+            <!-- <td>{{item._id}}</td> -->
             <td>{{item.firstName}}</td>
             <td>{{item.lastName}}</td>
+            <td>{{item.age}}</td>
             <td>{{item.hobbies}}</td>
             <td>{{item.gender}}</td>
             <td>{{item.city}}</td>
-            <td>{{item.age}}</td>
             <td>{{item.option}}
                 <button type="" class="btn btn-primary me-2" (click)="updateData(item)"><a href="#form"
                         class="">UPDATE</a></button>
