@@ -1,6 +1,6 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { response } from 'express';
 
 @Component({
@@ -20,38 +20,50 @@ export class FormComponent {
   }
 
   myform = new FormGroup({
-    // _id: new FormControl(''),
+    id: new FormControl(''),
     firstName: new FormControl(''),
     lastName: new FormControl(''),
     age: new FormControl(''),
-    hobbies: new FormControl([]),
+    hobbies: new FormArray([]),
     gender: new FormControl(''),
     city: new FormControl(''),
   });
 
-  // submit(data: any) {
-  //   data.preventDefault();
-  //   const formData = this.myform.value;
 
-  //   if (formData._id) {
-  //     this.updateData(formData);
-  //     this.myform.reset();
-  //   } else {
-  //     this.http.post<any>('https://student-api.mycodelibraries.com/api/student/add', formData)
-  //       .subscribe(response => {
-  //         this.myform.reset();
-  //         this.fetchData();
-  //       },
-  //       );
-  //   }
-  // }
+  onchange(e: any) {
+    let checkvalue = e.target.value;
+    let checked = e.target.checked
+    // console.log(checkvalue, checked);
+    let checkedArray = this.myform.get('hobbies') as FormArray;
+    if (checked) {
+      checkedArray.push(new FormControl(checkvalue));
+    }
+    // this.myform.reset();
+  }
 
   submit(data: any) {
     data.preventDefault();
     const formData = this.myform.value;
+    if (formData.id) {
+      this.http.post<any>('https://student-api.mycodelibraries.com/api/student/update', formData)
+        .subscribe(response => {
+          this.myform.reset();
+          this.fetchData();
+        },
+        );
+    } else {
+      this.addData(data)
+    }
+  }
+
+  addData(data: any) {
+    data.preventDefault();
+    const formData = this.myform.value;
     this.http.post('https://student-api.mycodelibraries.com/api/student/add', formData).subscribe
       (response => {
+        console.log(formData);
         this.myform.reset();
+        // this.myform.controls.hobbies.setValue([])
         this.fetchData();
       })
   }
@@ -66,7 +78,7 @@ export class FormComponent {
 
   updateData(item: any) {
     this.myform.setValue({
-      // _id: item._id, 
+      id: item._id,
       firstName: item.firstName,
       lastName: item.lastName,
       age: item.age,
@@ -74,12 +86,6 @@ export class FormComponent {
       gender: item.gender,
       city: item.city,
     });
-    this.http.post('https://student-api.mycodelibraries.com/api/student/update', this.data).subscribe(
-      (response: any) => {
-        console.log('edit data');
-        // this.fetchData();
-      }
-    )
   }
 
 
@@ -89,7 +95,6 @@ export class FormComponent {
         console.log('Item deleted successfully');
         console.log(id);
         this.fetchData();
-
       },
     );
   }
